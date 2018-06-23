@@ -18,10 +18,11 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
-
+GEOS_LIBRARY_PATH = '/usr/lib/x86_64-linux-gnu/libgeos_c.so.1.9.0'
 # Application definition
 
 INSTALLED_APPS = [
+    'mapwidgets',
     'bootstrap4',
     'hood.apps.HoodConfig',
     'django.contrib.admin',
@@ -132,3 +133,14 @@ STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+# Google Maps widget settings
+MAP_WIDGETS = {
+    "GooglePointFieldWidget": (
+        ("zoom", 15),
+        ("mapCenterLocation", [51.5073509, -0.12775829999998223]),
+        ("markerFitZoom", 11),
+        ("GooglePlaceAutocompleteOptions", {'componentRestrictions': {'country': 'uk'}})
+    ),
+    "GOOGLE_MAP_API_KEY": config('GOOGLE_MAP_API_KEY')
+}
