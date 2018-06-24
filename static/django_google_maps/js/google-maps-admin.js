@@ -13,6 +13,7 @@ field will be updated.
 Only one marker will remain present on the map at a time.
 
 This script expects:
+-1.2920659,36.82194619999996
 
 <input type="text" name="address" id="id_address" />
 <input type="text" name="geolocation" id="id_geolocation" />
@@ -33,18 +34,18 @@ function googleMapAdmin() {
 
     var self = {
         initialize: function() {
-            var lat = 0;
-            var lng = 0;
-            var zoom = 2;
+            var lat = -1.2920659;
+            var lng = 36.82194619999996;
+            var zoom = 6;
             // set up initial map to be world view. also, add change
             // event so changing address will update the map
-            // var existinglocation = self.getExistingLocation();
+            var existinglocation = self.getExistingLocation();
 
-            // if (existinglocation) {
-            //     lat = existinglocation[0];
-            //     lng = existinglocation[1];
-            //     zoom = 18;
-            // }
+            if (existinglocation) {
+                lat = existinglocation[0];
+                lng = existinglocation[1];
+                zoom = 18;
+            }
 
             var latlng = new google.maps.LatLng(lat,lng);
             var myOptions = {
@@ -53,9 +54,9 @@ function googleMapAdmin() {
               mapTypeId: self.getMapType()
             };
             map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
-            // if (existinglocation) {
-            //     self.setMarker(latlng);
-            // }
+            if (existinglocation) {
+                self.setMarker(latlng);
+            }
 
             autocomplete = new google.maps.places.Autocomplete(
                 /** @type {!HTMLInputElement} */(document.getElementById(addressId)),
