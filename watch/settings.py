@@ -18,10 +18,11 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
-
+GEOPOSITION_GOOGLE_MAPS_API_KEY = config('GOOGLE_MAP_API_KEY')
 # Application definition
 
 INSTALLED_APPS = [
+    'geoposition',
     'bootstrap4',
     'hood.apps.HoodConfig',
     'django.contrib.admin',
