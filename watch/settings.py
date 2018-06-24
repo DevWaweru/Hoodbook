@@ -22,6 +22,8 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = [
+    'leaflet',
+    'djgeojson',
     'bootstrap4',
     'hood.apps.HoodConfig',
     'django.contrib.admin',
@@ -132,3 +134,7 @@ STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+LEAFLET_CONFIG = {
+    'SPATIAL_EXTENT': (5.0, 44.0, 7.5, 46)
+}
