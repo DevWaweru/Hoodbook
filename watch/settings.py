@@ -18,7 +18,12 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
+# Activation period of user account
+ACCOUNT_ACTIVATION_DAYS = 2
+
+# Google Maps API key
 GOOGLE_MAPS_API_KEY = config('GOOGLE_MAP_API_KEY')
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -133,3 +138,11 @@ STATICFILES_STORAGE='whitenoise.django.GzipManifestStaticFilesStorage'
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+
+# Email configurations
+EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+EMAIL_HOST = config('EMAIL_HOST')
+EMAIL_PORT = config('EMAIL_PORT')
+EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
