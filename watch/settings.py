@@ -20,6 +20,7 @@ ALLOWED_HOSTS = ['*']
 
 # Activation period of user account
 ACCOUNT_ACTIVATION_DAYS = 2
+REGISTRATION_OPEN=True
 
 # Google Maps API key
 GOOGLE_MAPS_API_KEY = config('GOOGLE_MAP_API_KEY')
