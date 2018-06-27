@@ -5,3 +5,4 @@ venv/
 .vscode/
 db.sqlite3
 staticfiles/
+media/

@@ -15,6 +15,7 @@ class Hood(models.Model):
 
 class Status(models.Model):
     status_content = models.TextField()
+    date_posted = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     
 
@@ -31,10 +32,11 @@ class Bio(models.Model):
     nickname = models.CharField(max_length=50)
     user_bio = models.TextField()
     user_pic = models.ImageField(upload_to = 'p/', default='image')
-    location = GeoLocationField(blank=True)
-    address = AddressField(max_length=100, blank=True)
     user_hood = models.ForeignKey(Hood, on_delete=models.CASCADE, blank=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
+
+    def __str__(self):
+        return self.nickname
 
 def post_save_user_model_receiver(sender, instance,created,*args,**kwargs):
     if created:
