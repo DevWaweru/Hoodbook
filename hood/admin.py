@@ -21,6 +21,6 @@ class HoodCustom(admin.ModelAdmin):
 
 
 admin.site.register(Hood, HoodCustom)
-admin.site.register(Bio,HoodCustom)
+admin.site.register(Bio)
 admin.site.register(Business)
 admin.site.register(Status)
