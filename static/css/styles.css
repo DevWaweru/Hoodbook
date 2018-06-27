@@ -34,7 +34,7 @@
         letter-spacing: 1px;
         background: rgb(39, 38, 38);
         border-bottom: 1px solid #e6e6e6;
-        /* height: 70px; */
+        height: 70px;
     }
     #navMain .nav-link.active {
         outline: none;
@@ -53,4 +53,8 @@
     #navMain.navbar-shrink a {
         color: rgba(0, 0, 0, 0.973);
     }
+}
+
+.top{
+    margin-top: 2rem;
 }

@@ -5,4 +5,5 @@ from django.contrib.auth import views as authviews
 
 urlpatterns = [
     url('^$',views.home, name='home'),
+    url('^profile/$', views.profile, name='profile'),
 ]
