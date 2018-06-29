@@ -26,4 +26,4 @@ class StatusForm(forms.ModelForm):
     class Meta:
         model = Status
         fields = '__all__'
-        exclude = ['user','date_posted']
+        exclude = ['hood','user','date_posted']

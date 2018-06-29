@@ -4,3 +4,24 @@ body{
 .dropdown-right {
     margin-right: 8rem;
 }
+
+.top-section{
+    margin-top: 2rem;
+}
+
+.profile-head{
+    border: 1px solid #cecece;;
+    background-color: white;
+    padding-top: 7rem;
+    padding-bottom: 2rem;
+    text-align: center;
+    border-radius: 0.5rem;
+}
+.profile-head img{
+    width: 250px;
+}
+.profile-body{
+    border: 1px solid #cecece;;
+    background-color: white;
+    border-radius: 0.5rem;
+}

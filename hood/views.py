@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import HoodForm
+from .forms import HoodForm, StatusForm, BioForm, BusinessForm
 from .models import Bio, Status, Business, Hood
 from django.contrib.auth.models import User
 # Create your views here.
@@ -18,12 +18,14 @@ def profile(request, username):
     profile = Bio.get_bio_by_user(username)
 
     if request.method == 'POST':
-        form = HoodForm(request.POST)
+        form = StatusForm(request.POST)
         if form.is_valid():
-            geolocate = form.save(commit=False)
-            geolocate.save()
+            status = form.save(commit=False)
+            status.user = request.user
+            status.hood = profile.user_hood
+            status.save()
     else:
-        form = HoodForm()
+        form = StatusForm()
 
     return render(request, 'profile/profile.html',{
         'title':title,
@@ -31,3 +33,19 @@ def profile(request, username):
         'profile':profile,
         'statuses':statuses,
     })
+
+def update_location(request):
+    title = 'Update Location'
+
+    if request.method == 'POST':
+        form = HoodForm(request.POST)
+        if form.is_valid():
+            geolocate = form.save(commit=False)
+            geolocate.save()
+    else:
+        form = HoodForm()
+
+    return render(request, 'update.html', {
+        'title':title,
+        'form':form,
+        })

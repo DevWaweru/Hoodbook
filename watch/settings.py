@@ -18,6 +18,11 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 ALLOWED_HOSTS = ['*']
 
+UPLOADCARE = {
+    'pub_key': config('pub_key'),
+    'secret': config('secret'),
+}
+
 # Activation period of user account
 ACCOUNT_ACTIVATION_DAYS = 2
 REGISTRATION_OPEN=True
@@ -31,6 +36,7 @@ GOOGLE_MAPS_API_KEY = config('GOOGLE_MAP_API_KEY')
 INSTALLED_APPS = [
     'django_google_maps',
     'bootstrap4',
+    'pyuploadcare.dj',
     'hood.apps.HoodConfig',
     'django.contrib.admin',
     'django.contrib.auth',

@@ -3,6 +3,7 @@ from django.conf import settings
 from django.db.models.signals import post_save
 from django.contrib.auth.models import User
 from django_google_maps.fields import AddressField, GeoLocationField
+from pyuploadcare.dj.models import ImageField
 
 # Create your models here.
 class Hood(models.Model):
@@ -30,7 +31,7 @@ class Status(models.Model):
         return status
     
     def __str__(self):
-        return self.date_posted
+        return self.user.username
 
 class Business(models.Model):
     business_name = models.CharField(max_length=100)
@@ -44,7 +45,8 @@ class Business(models.Model):
 class Bio(models.Model):
     nickname = models.CharField(max_length=50, blank=True)
     user_bio = models.TextField(blank=True)
-    user_pic = models.ImageField(upload_to = 'p/', default='image')
+    # user_pic = models.ImageField(upload_to = 'p/', default='image')
+    user_upic = ImageField(blank=True, manual_crop='800x800')
     user_hood = models.ForeignKey(Hood, on_delete=models.CASCADE, blank=True, null=True)
     user = models.OneToOneField(settings.AUTH_USER_MODEL)
 
@@ -63,5 +65,5 @@ def post_save_user_model_receiver(sender, instance, created, *args, **kwargs):
         except Exception as error:
             # print(error)
             pass
-            
+
 post_save.connect(post_save_user_model_receiver, sender=settings.AUTH_USER_MODEL)

@@ -6,16 +6,37 @@
 {% endblock %}
 
 {% block content %}
-<div class="container">
+<div class="container top-section">
     <div class="row">
         <div class="col-md-12 profile-head">
             <a href="">
-                {% if profile.user_pic.url %}
-                <img src="{{profile.user_pic.url}}" alt="">
+                {% if profile.user_upic %}
+                <img src="{{profile.user_upic.cdn_url}}" alt="">
                 {% else %}
                 <img src="/static/img/avatah.png" alt="">
                 {% endif %}
             </a>
+        </div>
+    </div>
+</div>
+<div class="container top-section">
+    <div class="row profile-body">
+        <div class="col-4">
+            <div class="list-group list-group-flush" id="list-tab">
+                <a class="list-group-item list-group-item-action active" id="list-home-list" href="#" aria-controls="home">Home</a>
+                <a class="list-group-item list-group-item-action" id="list-profile-list" href="#" aria-controls="profile">Edit Info</a>
+                <a class="list-group-item list-group-item-action" id="list-messages-list" href="#" aria-controls="messages">Location</a>
+                <a class="list-group-item list-group-item-action" id="list-settings-list" href="#" aria-controls="settings">Businesses</a>
+            </div>
+        </div>
+        <div class="col-8">
+            {% if user.username == profile.user.username %}
+            <form action="" method="POST">
+                {% csrf_token %}
+                {% bootstrap_form form %}
+                <input type="submit" class="btn btn-success" value="Post Status">
+            </form>
+            {% endif %}
         </div>
     </div>
 </div>
