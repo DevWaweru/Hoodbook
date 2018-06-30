@@ -31,12 +31,34 @@
         </div>
         <div class="col-8">
             {% if user.username == profile.user.username %}
-            <form action="" method="POST">
-                {% csrf_token %}
-                {% bootstrap_form form %}
-                <input type="submit" class="btn btn-success" value="Post Status">
-            </form>
+                {% if profile.user_hood.name|length == 0 %}
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h4>Set up your hood to make posts</h4>
+                    </div>
+                </div>
+                {% else %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <div class="form-group">
+                        <input type="submit" value="Post">
+                    </div>
+                </form>
+                {% endif %}
+                <hr>
             {% endif %}
+            {% for status in statuses %}
+            <div class="row">
+                <div class="col-12">
+                    <p>{{status.status_content}}</p>
+                    <p class="small"> {{status.date_posted|timesince}} </p>
+                </div>
+            </div>
+            <hr>
+            {% empty %}
+            <h4 class="text-center">No statuses for this user</h4>
+            {% endfor %}
         </div>
     </div>
 </div>

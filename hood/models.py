@@ -19,7 +19,10 @@ class Status(models.Model):
     date_posted = models.DateTimeField(auto_now=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     hood = models.ForeignKey(Hood, on_delete=models.CASCADE)
-
+    
+    class Meta:
+        ordering = ('-date_posted',)
+    
     @classmethod
     def status_by_user(cls, username):
         status = Status.objects.filter(user__username = username)
