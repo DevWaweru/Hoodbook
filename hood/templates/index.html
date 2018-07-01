@@ -4,8 +4,42 @@
 {% block content %}
 <div class="container">
     <div class="row">
-        <div class="col-md-12">
-            <h1>Hello world</h1>
+        <div class="col-md-8">
+            {% if user.is_authenticated %}
+                {% if profile.user_hood.name|length == 0 %}
+                <div class="row">
+                    <div class="col-12 text-center">
+                        <h4>Set up your hood to make posts</h4>
+                    </div>
+                </div>
+                {% else %}
+                <form action="" method="POST">
+                    {% csrf_token %}
+                    {% bootstrap_form form %}
+                    <div class="form-group">
+                        <input type="submit" value="Post">
+                    </div>
+                </form>
+                {% endif %}
+                <hr>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            {% for status in statuses %}
+            <div class="row home-statuses">
+                <div class="col-md-12">
+                    <p><a href="/profile/{{status.user.username}}/">{{status.user.username}}</a></p>
+                    <p>{{status.status_content}}</p>
+                    <p class="small"> {{status.date_posted|timesince}} </p>
+                </div>
+            </div>
+            {% empty %}
+            <h4 class="text-center">No statuses for this Hood <br>Start posting...</h4>
+            {% endfor %}
         </div>
     </div>
 </div>

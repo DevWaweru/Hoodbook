@@ -12,7 +12,7 @@ class Hood(models.Model):
     address = AddressField(max_length=100)
     
     def __str__(self):
-        return self.address
+        return self.name
 
 class Status(models.Model):
     status_content = models.TextField()
@@ -29,8 +29,8 @@ class Status(models.Model):
         return status
     
     @classmethod
-    def status_by_hood(cls, hood_id):
-        status = Status.objects.filter(hood__pk = hood_id)
+    def status_by_hood(cls, hood_name):
+        status = Status.objects.filter(hood__name = hood_name)
         return status
     
     def __str__(self):

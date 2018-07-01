@@ -6,9 +6,29 @@ from django.contrib.auth.models import User
 
 def home(request):
     title = 'Home'
+    # Get users hood
+    profile = Bio.get_bio_by_user(request.user)
+    print(profile.user_hood.name)
+
+    # Display all statuses from the hood
+    statuses = Status.status_by_hood(profile.user_hood.name)
+
+    #Create form for posting status
+    if request.method == 'POST':
+        form = StatusForm(request.POST)
+        if form.is_valid():
+            status = form.save(commit=False)
+            status.user = request.user
+            status.hood = profile.user_hood
+            status.save()
+    else:
+        form = StatusForm()
 
     return render(request, 'index.html',{
         'title':title,
+        'profile':profile,
+        'form': form,
+        'statuses':statuses
     })
 
 def profile(request, username):
