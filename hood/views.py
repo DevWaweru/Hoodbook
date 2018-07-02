@@ -3,6 +3,7 @@ from .forms import HoodForm, StatusForm, BioForm, BusinessForm
 from .models import Bio, Status, Business, Hood
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
+from django.http import JsonResponse
 # Create your views here.
 
 def home(request):
@@ -73,8 +74,9 @@ def profile_bio(request, username):
         if hood_form.is_valid():
             geolocate = form.save(commit=False)
             geolocate.save()
+    
     else:
-        bio_form = BioForm()
+        bio_form = BioForm(instance=request.user.bio)
         hood_form = HoodForm()
 
 
@@ -88,10 +90,33 @@ def profile_bio(request, username):
 @login_required(login_url='/accounts/login')
 def profile_business(request, username):
     title = 'Business'
+
+    businesses = Business.get_business_by_user(username)
     profile = Bio.get_bio_by_user(username)
+
+    # if request.method == 'POST':
+    #     business_form = BusinessForm(request.POST)
+    #     if business_form.is_valid():
+    #         business = business_form.save(commit=False)
+    #         business.user = request.user
+    #         business.save()
+    #         business=BusinessForm()
+    # else:
+    business_form = BusinessForm()
 
     return render(request, 'profile/business.html', {
         'title':title,
-        'form':form,
+        'form': business_form,
+        'businesses':businesses,
         'profile':profile,
     })
+
+def new_business(request):
+    business_name = request.POST.get('business_name')
+    business_email = request.POST.get('business_email')
+    business_hood = request.POST.get('business_hood')
+
+    business = Business(business_name=business_name, business_email=business_email, business_hood_id=business_hood, user = request.user)
+    business.save()
+    data = {'success': 'Business has been successfully added'}
+    return JsonResponse(data)

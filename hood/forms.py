@@ -20,7 +20,7 @@ class BusinessForm(forms.ModelForm):
     class Meta:
         model = Business
         fields = '__all__'
-        exclude = ['date_added']
+        exclude = ['date_added', 'user']
 
 class StatusForm(forms.ModelForm):
     class Meta:

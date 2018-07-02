@@ -82,6 +82,10 @@
                     </div>
                 </form>
                 <p>Can't find your neighbourhood?<a class="btn btn-link" data-toggle="modal" data-target="#exampleModalCenter">Add Neighbourhood</a></p>
+            {% else %}
+                <p>Nickname: {{profile.nickname}} </p>
+                <p>User bio: {{profile.user_bio}} </p>
+                <p>Hood: {{profile.user_hood.name}} </p>
             {% endif %}
         </div>
     </div>

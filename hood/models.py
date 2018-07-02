@@ -41,9 +41,15 @@ class Business(models.Model):
     business_email = models.EmailField(max_length=100)
     date_added = models.DateTimeField(auto_now=True)
     business_hood = models.ForeignKey(Hood, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     
     def __str__(self):
         return self.business_name
+    
+    @classmethod
+    def get_business_by_user(cls, username):
+        businesses = Business.objects.filter(user__username=username)
+        return businesses
 
 class Bio(models.Model):
     nickname = models.CharField(max_length=50, blank=True)
