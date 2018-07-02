@@ -74,8 +74,10 @@
         </div>
         <div class="col-md-8 profile-status">
             {% if user.username == profile.user.username %}
-                <form action="{% url 'bio' username=profile.user.username %}" method="POST">
+                <p>Last Login: {{profile.user.last_login}} </p>
+                <form action="." method="POST">
                     {% csrf_token %}
+                    {% bootstrap_form user_form %}
                     {% bootstrap_form form %}
                     <div class="form-group">
                         <input type="submit" value="Update bio">

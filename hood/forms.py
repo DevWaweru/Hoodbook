@@ -1,6 +1,7 @@
 from django import forms
 from .models import Hood, Status, Bio, Business
 from django_google_maps.widgets import GoogleMapsAddressWidget
+from django.contrib.auth.models import User
 
 class BioForm(forms.ModelForm):
     class Meta:
@@ -27,3 +28,8 @@ class StatusForm(forms.ModelForm):
         model = Status
         fields = '__all__'
         exclude = ['hood','user','date_posted']
+
+class EditUser(forms.ModelForm):
+    class Meta:
+        model = User
+        fields = ('first_name', 'last_name', 'email')

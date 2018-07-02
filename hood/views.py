@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import HoodForm, StatusForm, BioForm, BusinessForm
+from .forms import HoodForm, StatusForm, BioForm, BusinessForm, EditUser
 from .models import Bio, Status, Business, Hood
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
@@ -65,9 +65,11 @@ def profile_bio(request, username):
     profile = Bio.get_bio_by_user(username)
 
     if request.method == 'POST':
+        user_form = EditUser(instance=request.user, data=request.POST)
         bio_form = BioForm(instance = request.user.bio, data=request.POST)
-        if bio_form.is_valid():
+        if bio_form.is_valid() and user_form.is_valid():
             bio_form.save()
+            user_form.save()
             # bio.user = request.user
 
         hood_form = HoodForm(request.POST)
@@ -77,6 +79,7 @@ def profile_bio(request, username):
     
     else:
         bio_form = BioForm(instance=request.user.bio)
+        user_form = EditUser(instance=request.user)
         hood_form = HoodForm()
 
 
@@ -84,6 +87,7 @@ def profile_bio(request, username):
         'title':title,
         'form':bio_form,
         'hood_form':hood_form,
+        'user_form':user_form,
         'profile':profile,
     })
 
