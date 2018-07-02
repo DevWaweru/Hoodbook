@@ -2,6 +2,12 @@ from django import forms
 from .models import Hood, Status, Bio, Business
 from django_google_maps.widgets import GoogleMapsAddressWidget
 
+class BioForm(forms.ModelForm):
+    class Meta:
+        model = Bio
+        fields = '__all__'
+        exclude = ['user']
+
 class HoodForm(forms.ModelForm):
     class Meta:
         model = Hood
@@ -15,12 +21,6 @@ class BusinessForm(forms.ModelForm):
         model = Business
         fields = '__all__'
         exclude = ['date_added']
-
-class BioForm(forms.ModelForm):
-    class Meta:
-        model = Bio
-        fields = '__all__'
-        exclude = ['user']
 
 class StatusForm(forms.ModelForm):
     class Meta:

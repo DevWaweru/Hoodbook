@@ -34,9 +34,9 @@ GOOGLE_MAPS_API_KEY = config('GOOGLE_MAP_API_KEY')
 # Application definition
 
 INSTALLED_APPS = [
-    'django_google_maps',
     'bootstrap4',
     'pyuploadcare.dj',
+    'django_google_maps',
     'hood.apps.HoodConfig',
     'django.contrib.admin',
     'django.contrib.auth',

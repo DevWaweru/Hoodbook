@@ -6,7 +6,9 @@ from django.contrib.auth import views as authviews
 
 urlpatterns = [
     url('^$',views.home, name='home'),
-    url(r'^profile/(?P<username>\w+)', views.profile, name='profile'),
+    url(r'^profile/(?P<username>\w+)/$', views.profile, name='profile'),
+    url(r'^profile/bio/(?P<username>\w+)/$', views.profile_bio, name='bio'),
+    url(r'^profile/business/(?P<username>\w+)/$', views.profile_business, name='business'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

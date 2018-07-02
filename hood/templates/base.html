@@ -12,17 +12,17 @@
     <title>Hoodbook</title>
     {% endif %}
 
+    {% block extrahead %}
+    {% endblock %}
 
     {% block styles %}
         {% bootstrap_css %}
-        
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Raleway' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Catamaran' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Julius Sans One' rel='stylesheet'>
         <link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet'>
         <link rel="stylesheet" href="{% static 'css/styles.css'%}">
-
     {% endblock %}
 </head>
 <body>
@@ -38,3 +38,5 @@
     {% endblock %}
 </body>
 </html>
+
+<!-- <script type="text/javascript" src="https://ucarecdn.com/libs/widget/3.x/uploadcare.full.min.js"></script> -->
