@@ -73,6 +73,7 @@
             </ul>
         </div>
         <div class="col-md-8 profile-status">
+            <p>Joined {{profile.user.date_joined|timesince}} ago </p>
             {% if user.username == profile.user.username %}
                 <p>Last Login: {{profile.user.last_login}} </p>
                 <form action="." method="POST">
